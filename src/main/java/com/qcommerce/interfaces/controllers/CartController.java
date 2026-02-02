@@ -149,11 +149,11 @@ public class CartController {
         return CartResponse.builder()
             .id(cart.getId())
             .shopId(cart.getShop().getId())
-            .shopName(cart.getShop().getName())
+            .shopName(cart.getShop().getShopName())
             .items(cart.getItems().stream()
                 .map(item -> CartResponse.CartItemResponse.builder()
                     .variantId(item.getVariant().getId())
-                    .productName(item.getVariant().getProduct().getName())
+                    .productName(item.getVariant().getProduct().getProductName())
                     .variantDescription(item.getVariant().getSize() + " - " + 
                                        item.getVariant().getWeight())
                     .quantity(item.getQuantity())

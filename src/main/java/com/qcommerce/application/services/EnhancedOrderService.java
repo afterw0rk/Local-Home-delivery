@@ -57,14 +57,14 @@ public class EnhancedOrderService {
                     cart.getShop().getId()
                 )
                 .orElseThrow(() -> new IllegalStateException(
-                    "Inventory not found for product: " + cartItem.getVariant().getProduct().getName()
+                    "Inventory not found for product: " + cartItem.getVariant().getProduct().getProductName()
                 ));
 
             // Check availability
             if (inventory.getAvailableQuantity() < cartItem.getQuantity()) {
                 throw new IllegalStateException(
                     String.format("Insufficient stock for %s. Available: %d, Requested: %d",
-                        cartItem.getVariant().getProduct().getName(),
+                        cartItem.getVariant().getProduct().getProductName(),
                         inventory.getAvailableQuantity(),
                         cartItem.getQuantity())
                 );
@@ -79,7 +79,7 @@ public class EnhancedOrderService {
             inventoryRepository.save(inventory);
             log.info("[v0] Reserved {} units of product: {}", 
                      cartItem.getQuantity(), 
-                     cartItem.getVariant().getProduct().getName());
+                     cartItem.getVariant().getProduct().getProductName());
         }
 
         // Create order
@@ -102,7 +102,7 @@ public class EnhancedOrderService {
                 .variant(cartItem.getVariant())
                 .quantity(cartItem.getQuantity())
                 .unitPrice(cartItem.getVariant().getPrice())
-                .productName(cartItem.getVariant().getProduct().getName())
+                .productName(cartItem.getVariant().getProduct().getProductName())
                 .variantDescription(cartItem.getVariant().getSize() + " - " + 
                                    cartItem.getVariant().getWeight())
                 .build();

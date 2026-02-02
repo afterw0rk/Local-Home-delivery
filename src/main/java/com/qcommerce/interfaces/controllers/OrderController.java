@@ -168,7 +168,7 @@ public class OrderController {
             .orderNumber(order.getOrderNumber())
             .userId(order.getUserId())
             .shopId(order.getShop().getId())
-            .shopName(order.getShop().getName())
+            .shopName(order.getShop().getShopName())
             .status(order.getStatus().name())
             .subtotal(order.getSubtotal())
             .deliveryFee(order.getDeliveryFee())
