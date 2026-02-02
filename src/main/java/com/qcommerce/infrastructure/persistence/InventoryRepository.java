@@ -155,4 +155,23 @@ public interface InventoryRepository extends JpaRepository<Inventory, Long> {
         @Param("variantId") Long variantId,
         @Param("quantity") Integer quantity
     );
+
+    /**
+     * Find inventory by product variant ID and shop ID
+     */
+    @Query("SELECT i FROM Inventory i WHERE i.productVariantId = :variantId AND i.shopId = :shopId")
+    Optional<Inventory> findByProductVariantIdAndShopId(
+        @Param("variantId") Long variantId,
+        @Param("shopId") Long shopId
+    );
+
+    /**
+     * Find inventory by product variant ID and shop ID with optimistic lock
+     */
+    @Lock(LockModeType.OPTIMISTIC)
+    @Query("SELECT i FROM Inventory i WHERE i.productVariantId = :variantId AND i.shopId = :shopId")
+    Optional<Inventory> findByProductVariantIdAndShopIdWithLock(
+        @Param("variantId") Long variantId,
+        @Param("shopId") Long shopId
+    );
 }

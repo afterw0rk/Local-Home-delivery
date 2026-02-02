@@ -31,8 +31,18 @@ public class ProductVariant {
     @Column(name = "product_id", nullable = false)
     private Long productId;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "product_id", insertable = false, updatable = false)
+    private Product product;
+
     @Column(name = "variant_name", nullable = false)
     private String variantName;
+
+    @Column(name = "size", length = 100)
+    private String size;
+
+    @Column(name = "weight", length = 100)
+    private String weight;
 
     @Column(name = "sku", nullable = false, unique = true, length = 100)
     private String sku;

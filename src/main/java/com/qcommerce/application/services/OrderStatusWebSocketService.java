@@ -99,6 +99,13 @@ public class OrderStatusWebSocketService {
     }
 
     /**
+     * Send order status update (alias for broadcastOrderUpdate)
+     */
+    public void sendOrderStatusUpdate(Long orderId, String orderStatus, String message) {
+        broadcastOrderUpdate(orderId, orderStatus, message, null);
+    }
+
+    /**
      * Broadcast inventory update to shop subscribers
      * 
      * Topic: /topic/inventory/{shopId}
