@@ -50,6 +50,16 @@ public class OrderItem {
     private String variantDescription;
 
     /**
+     * Get line total (calculate if not set)
+     */
+    public BigDecimal getLineTotal() {
+        if (this.lineTotal == null) {
+            calculateLineTotal();
+        }
+        return this.lineTotal;
+    }
+
+    /**
      * Calculate line total from quantity and unit price
      */
     public void calculateLineTotal() {

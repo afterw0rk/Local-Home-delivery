@@ -71,10 +71,7 @@ public class EnhancedOrderService {
             }
 
             // Reserve inventory (this will trigger optimistic lock check on commit)
-            boolean reserved = inventory.reserveQuantity(cartItem.getQuantity());
-            if (!reserved) {
-                throw new IllegalStateException("Failed to reserve inventory");
-            }
+            inventory.deductStock(cartItem.getQuantity());
 
             inventoryRepository.save(inventory);
             log.info("[v0] Reserved {} units of product: {}", 
@@ -208,7 +205,7 @@ public class EnhancedOrderService {
                 )
                 .orElseThrow(() -> new IllegalStateException("Inventory not found"));
 
-            inventory.releaseReserved(item.getQuantity());
+            inventory.addStock(item.getQuantity());
             inventoryRepository.save(inventory);
             
             log.info("[v0] Restored {} units of product: {}", 
