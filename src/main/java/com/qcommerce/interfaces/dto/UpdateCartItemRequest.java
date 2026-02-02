@@ -1,6 +1,7 @@
 package com.qcommerce.interfaces.dto;
 
 import jakarta.validation.constraints.Min;
+import jakarta.validation.constraints.Max;
 import jakarta.validation.constraints.NotNull;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -17,6 +18,7 @@ import lombok.NoArgsConstructor;
 public class UpdateCartItemRequest {
 
     @NotNull(message = "Quantity is required")
-    @Min(value = 0, message = "Quantity must be at least 0")
+    @Min(value = 0, message = "Quantity must be at least 0 (0 to remove item)")
+    @Max(value = 999, message = "Quantity cannot exceed 999 items")
     private Integer quantity;
 }
